@@ -48,12 +48,12 @@ const clearBtn = document.getElementById("clear");
 
 zeroBtn.addEventListener('click', () => {
     if(displayVar=="0"){
-
+        //do nothing
     }else{
         displayVar = displayVar + "0";
         display.textContent = displayVar;
-        display.textContent = displayVar;
     }
+    display.textContent = displayVar;
     console.log(displayVar);
 });
 oneBtn.addEventListener('click', () => {
@@ -61,8 +61,8 @@ oneBtn.addEventListener('click', () => {
         displayVar="1";
     }else{
         displayVar = displayVar + "1";
-        display.textContent = displayVar;
     }
+    display.textContent = displayVar;
     console.log(displayVar);
 });
 twoBtn.addEventListener('click', () => {
@@ -70,8 +70,8 @@ twoBtn.addEventListener('click', () => {
         displayVar="2";
     }else{
         displayVar = displayVar + "2";
-        display.textContent = displayVar;
     }
+    display.textContent = displayVar;
     console.log(displayVar);
 });
 threeBtn.addEventListener('click', () => {
@@ -79,8 +79,8 @@ threeBtn.addEventListener('click', () => {
         displayVar="3";
     }else{
         displayVar = displayVar + "3";
-        display.textContent = displayVar;
     }
+    display.textContent = displayVar;
     console.log(displayVar);
 });
 fourBtn.addEventListener('click', () => {
@@ -88,8 +88,8 @@ fourBtn.addEventListener('click', () => {
         displayVar="4";
     }else{
         displayVar = displayVar + "4";
-        display.textContent = displayVar;
     }
+    display.textContent = displayVar;
     console.log(displayVar);
 });
 fiveBtn.addEventListener('click', () => {
@@ -97,8 +97,8 @@ fiveBtn.addEventListener('click', () => {
         displayVar="5";
     }else{
         displayVar = displayVar + "5";
-        display.textContent = displayVar;
     }
+    display.textContent = displayVar;
     console.log(displayVar);
 });
 sixBtn.addEventListener('click', () => {
@@ -106,8 +106,8 @@ sixBtn.addEventListener('click', () => {
         displayVar="6";
     }else{
         displayVar = displayVar + "6";
-        display.textContent = displayVar;
     }
+    display.textContent = displayVar;
     console.log(displayVar);
 });
 sevenBtn.addEventListener('click', () => {
@@ -115,8 +115,8 @@ sevenBtn.addEventListener('click', () => {
         displayVar="7";
     }else{
         displayVar = displayVar + "7";
-        display.textContent = displayVar;
     }
+    display.textContent = displayVar;
     console.log(displayVar);
 });
 eightBtn.addEventListener('click', () => {
@@ -124,8 +124,8 @@ eightBtn.addEventListener('click', () => {
         displayVar="8";
     }else{
         displayVar = displayVar + "8";
-        display.textContent = displayVar;
     }
+    display.textContent = displayVar;
     console.log(displayVar);
 });
 nineBtn.addEventListener('click', () => {
@@ -133,8 +133,8 @@ nineBtn.addEventListener('click', () => {
         displayVar="9";
     }else{
         displayVar = displayVar + "9";
-        display.textContent = displayVar;
     }
+    display.textContent = displayVar;
     console.log(displayVar);
 });
 
@@ -187,6 +187,7 @@ clearBtn.addEventListener('click', () => {
     displayVar = "0";
     numA = 0;//null
     numB = 0;//null
+    display.textContent = displayVar;
 });
 
 
