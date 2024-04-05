@@ -17,6 +17,11 @@
     flex-direction: row;
 }
 
+.right {
+    display: flex;
+    flex-direction: column;
+}
+
 .button { 
     background-color: grey;
     width: 50px;
