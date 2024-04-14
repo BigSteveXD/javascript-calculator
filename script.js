@@ -1,8 +1,9 @@
 let displayVar = "0";
-let currentOp = add;
+let currentOp;
 let prevOp;
 let numA = 0;
 let numB = 0;
+let prevBtn = "";
 
 let bSwitch = false;
 let bReset = false;
@@ -28,7 +29,7 @@ display.textContent = displayVar;
 
 const zeroBtn = document.getElementById("0");
 const oneBtn = document.getElementById("1");
-const twoBtn = document.getElementById("2");
+        const twoBtn = document.getElementById("2");
 const threeBtn = document.getElementById("3");
 const fourBtn = document.getElementById("4");
 const fiveBtn = document.getElementById("5");
@@ -48,6 +49,7 @@ const clearBtn = document.getElementById("clear");
 
 zeroBtn.addEventListener('click', () => {
     console.log("zeroBtn");
+    prevBtn = "0";
     if(bReset==true){
         displayVar="0";
         bReset = false;
@@ -62,6 +64,7 @@ zeroBtn.addEventListener('click', () => {
 });
 oneBtn.addEventListener('click', () => {
     console.log("oneBtn");
+    prevBtn = "1";
     if(bReset==true){
         displayVar="0";
         bReset = false;
@@ -76,6 +79,7 @@ oneBtn.addEventListener('click', () => {
 });
 twoBtn.addEventListener('click', () => {
     console.log("twoBtn");
+    prevBtn = "2";
     if(bReset==true){
         displayVar="0";
         bReset = false;
@@ -90,6 +94,7 @@ twoBtn.addEventListener('click', () => {
 });
 threeBtn.addEventListener('click', () => {
     console.log("threeBtn");
+    prevBtn = "3";
     if(bReset==true){
         displayVar="0";
         bReset = false;
@@ -104,6 +109,7 @@ threeBtn.addEventListener('click', () => {
 });
 fourBtn.addEventListener('click', () => {
     console.log("fourBtn");
+    prevBtn = "4";
     if(bReset==true){
         displayVar="0";
         bReset = false;
@@ -118,6 +124,7 @@ fourBtn.addEventListener('click', () => {
 });
 fiveBtn.addEventListener('click', () => {
     console.log("fiveBtn");
+    prevBtn = "5";
     if(bReset==true){
         displayVar="0";
         bReset = false;
@@ -132,6 +139,7 @@ fiveBtn.addEventListener('click', () => {
 });
 sixBtn.addEventListener('click', () => {
     console.log("sixBtn");
+    prevBtn = "6";
     if(bReset==true){
         displayVar="0";
         bReset = false;
@@ -146,6 +154,7 @@ sixBtn.addEventListener('click', () => {
 });
 sevenBtn.addEventListener('click', () => {
     console.log("sevenBtn");
+    prevBtn = "7";
     if(bReset==true){
         displayVar="0";
         bReset = false;
@@ -160,6 +169,7 @@ sevenBtn.addEventListener('click', () => {
 });
 eightBtn.addEventListener('click', () => {
     console.log("eightBtn");
+    prevBtn = "8";
     if(bReset==true){
         displayVar="0";
         bReset = false;
@@ -174,6 +184,7 @@ eightBtn.addEventListener('click', () => {
 });
 nineBtn.addEventListener('click', () => {
     console.log("nineBtn");
+    prevBtn = "9";
     if(bReset==true){
         displayVar="0";
         bReset = false;
@@ -188,31 +199,41 @@ nineBtn.addEventListener('click', () => {
 });
 
 
-addBtn.addEventListener('click', () => {                                         
+addBtn.addEventListener('click', () => {
     console.log("add");
-    //if(prevOp==null){
-        //prevOp = currentOp;
-    //}else{
-        //prevOp = currentOp;
-    //}
-    prevOp = currentOp;
-    currentOp = add;
-    if(bSwitch==false){
+    prevBtn = "operator";
+
+    if(currentOp==undefined){//default
+        currentOp = add;
+        prevOp = currentOp;
+    }else{//change currentOp
+        prevOp = currentOp;
+        currentOp = add;
+    }
+    if(bSwitch==false){//numA empty so put displayVar into numA
         numA = Number(displayVar);
-        bReset = true;
-        bSwitch = true;
-    }else if(bSwitch==true){
+        bReset = true;//reset display
+        bSwitch = true;//switch to fill numbB
+    }else if(bSwitch==true){//numA filled so put displayVar into numB
         numB = Number(displayVar);
-        numA = operate(prevOp, numA, numB);
-        displayVar = numA;
+        numA = operate(prevOp, numA, numB);//put result into numA
+        numB = 0;
+        displayVar = numA;//put result into displayVar
         display.textContent = displayVar;
-        bReset = true;
+        bReset = true;//reset display
     }
 });
 subtractBtn.addEventListener('click', () => {
     console.log("subtract");
-    prevOp = currentOp;
-    currentOp = subtract;
+    prevBtn = "operator";
+
+    if(currentOp==undefined){
+        currentOp = subtract;
+        prevOp = currentOp;
+    }else{
+        prevOp = currentOp;
+        currentOp = subtract;
+    }
     if(bSwitch==false){
         numA = Number(displayVar);
         bReset = true;
@@ -220,6 +241,7 @@ subtractBtn.addEventListener('click', () => {
     }else if(bSwitch==true){
         numB = Number(displayVar);
         numA = operate(prevOp, numA, numB);
+        numB = 0;
         displayVar = numA;
         display.textContent = displayVar;
         bReset = true;
@@ -227,8 +249,15 @@ subtractBtn.addEventListener('click', () => {
 });
 multiplyBtn.addEventListener('click', () => {
     console.log("multiply");
-    prevOp = currentOp;
-    currentOp = multiply;
+    prevBtn = "operator";
+
+    if(currentOp==undefined){
+        currentOp = multiply;
+        prevOp = currentOp;
+    }else{
+        prevOp = currentOp;
+        currentOp = multiply;
+    }
     if(bSwitch==false){
         numA = Number(displayVar);
         bReset = true;
@@ -236,6 +265,7 @@ multiplyBtn.addEventListener('click', () => {
     }else if(bSwitch==true){
         numB = Number(displayVar);
         numA = operate(prevOp, numA, numB);
+        numB = 0;
         displayVar = numA;
         display.textContent = displayVar;
         bReset = true;
@@ -243,8 +273,15 @@ multiplyBtn.addEventListener('click', () => {
 });
 divideBtn.addEventListener('click', () => {
     console.log("divide");
-    prevOp = currentOp;
-    currentOp = divide;
+    prevBtn = "operator";
+
+    if(currentOp==undefined){
+        currentOp = divide;
+        prevOp = currentOp;
+    }else{
+        prevOp = currentOp;
+        currentOp = divide;
+    }
     if(bSwitch==false){
         numA = Number(displayVar);
         bReset = true;
@@ -252,6 +289,7 @@ divideBtn.addEventListener('click', () => {
     }else if(bSwitch==true){
         numB = Number(displayVar);
         numA = operate(prevOp, numA, numB);
+        numB = 0;
         displayVar = numA;
         display.textContent = displayVar;
         bReset = true;
@@ -261,11 +299,30 @@ divideBtn.addEventListener('click', () => {
 
 equalBtn.addEventListener('click', () => {
     console.log("equal");
-    numB = Number(displayVar);
-    if(bReset==true){
+    console.log(currentOp);
+    if(currentOp==undefined){
+        currentOp = add;
+        prevOp = currentOp;
+    }
+    if(bReset==true&&prevBtn!="equal"){
         displayVar="0";
         bReset = false;
     }
+    if(prevBtn == "equal"){
+        numA = Number(displayVar);
+        if(currentOp!=multiply && currentOp!=divide){
+            numB = 0;
+        }else{
+            numB = 1;
+        }
+        
+        bReset = true;
+        bSwitch = true;
+    }else{
+        numB = Number(displayVar);
+    }
+    prevBtn = "equal";
+
     bSwitch = false;
     if(displayVar.localeCompare("Can't divide by zero")===0){
         console.log("display reset");
