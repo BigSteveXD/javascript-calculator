@@ -1,6 +1,6 @@
 .calculator { 
     background-color: darkgrey;
-    width: 250px;
+    width: 300px;
     height: 400px;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,14 @@
 #display {
     background-color: grey;
     width: 250px;
-    margin: 15px;
+    margin: 10px;
+    /* margin-top: 10px; */
+    /* margin-left: 10px; */
+    /* margin-right: 10px; */
+}
+
+.top {
+    display: flex;
 }
 
 .bottom{
@@ -22,7 +29,7 @@
     display: flex;
     flex-wrap: wrap;
     /* flex-direction: column; */
-    margin: 10px;
+    /* margin: 10px; */
     align-items: center;
 }
 
@@ -31,9 +38,10 @@
     flex-direction: column;
 }
 
-.button { 
+.button {
     background-color: grey;
-    width: 50px;
-    height: 50px;
+    /* 50 */
+    width: 60px;
+    height: 60px;
 }
 
