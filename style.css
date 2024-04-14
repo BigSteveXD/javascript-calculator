@@ -1,6 +1,6 @@
 .calculator { 
     background-color: darkgrey;
-    width: 300px;
+    width: 250px;
     height: 400px;
     display: flex;
     flex-direction: column;
@@ -10,11 +10,20 @@
 #display {
     background-color: grey;
     width: 250px;
+    margin: 15px;
 }
 
 .bottom{
     display: flex;
     flex-direction: row;
+}
+
+.left {
+    display: flex;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    margin: 10px;
+    align-items: center;
 }
 
 .right {
