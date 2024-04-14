@@ -29,12 +29,10 @@
 .left {
     display: flex;
     flex-wrap: wrap;
-    /* flex-direction: column; */
-    /* flex-direction: ; */
-    /* margin: 10px; */
+    justify-content:center;
     align-items: start;
     padding-left: 25px;
-    /* padding-right: 5px; */
+    margin-right: 5px;
     padding-bottom: 15px;
 }
 
