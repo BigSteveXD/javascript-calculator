@@ -1,5 +1,5 @@
 .calculator { 
-    background-color: darkgrey;
+    background-color: #43BEE0;
     width: 300px;
     height: 400px;
     display: flex;
@@ -43,9 +43,16 @@
 }
 
 .button {
-    background-color: grey;
+    background-color: lightblue;
     /* 50 */
     width: 60px;
     height: 60px;
 }
 
+.rButton {
+    /* background-color: white; */
+}
+
+.lButton {
+    background-color: white;
+}
