@@ -221,7 +221,7 @@ nineBtn.addEventListener('click', () => {
     }
     //if(prevBtn===currentBtn){//create currentBtn
         //numA=displayVar;
-        //switchNum = true;///////////////////////////////////
+        //switchNum = true;
     //}
     prevBtn = "9";
     if(resetDisplay===true){
@@ -264,13 +264,16 @@ addBtn.addEventListener('click', () => {
             switchNum = true;
         }
     }
-    if(prevBtn==="add"){//"operator"
+    if(prevBtn==="add"){
         numB = numA;
         displayVar = operate(prevOp, numA, numB);
         display.textContent = displayVar;
-        switchNum = false;
+        //switchNum = false;
+
+        numA = displayVar;
+        switchNum = true;
     }
-    prevBtn = "add";//"operator"
+    prevBtn = "add";
     console.log("add " + "numA:" + numA + "\ncurrentOp:" + currentOp.toString() + "\nnumB:" + numB + " displayVar:" + displayVar + "\nprevOp:" + prevOp.toString() + "\nprevBtn:" + prevBtn);
 });
 subtractBtn.addEventListener('click', () => {
@@ -299,13 +302,16 @@ subtractBtn.addEventListener('click', () => {
             switchNum = true;
         }
     }
-    if(prevBtn==="subtract"){//"operator"
+    if(prevBtn==="subtract"){
         numB = numA;
         displayVar = operate(prevOp, numA, numB);
         display.textContent = displayVar;
-        switchNum = false;
+        //switchNum = false;
+
+        numA = displayVar;
+        switchNum = true;
     }
-    prevBtn = "subtract";//"operator"
+    prevBtn = "subtract";
     console.log("subtract " + "numA:" + numA + "\ncurrentOp:" + currentOp.toString() + "\nnumB:" + numB + " displayVar:" + displayVar + "\nprevOp:" + prevOp.toString() + "\nprevBtn:" + prevBtn);
 });
 multiplyBtn.addEventListener('click', () => {
@@ -334,13 +340,16 @@ multiplyBtn.addEventListener('click', () => {
             switchNum = true;
         }
     }
-    if(prevBtn==="multiply"){//"operator"
+    if(prevBtn==="multiply"){
         numB = numA;
         displayVar = operate(prevOp, numA, numB);
         display.textContent = displayVar;
-        switchNum = false;
+        //switchNum = false;
+
+        numA = displayVar;
+        switchNum = true;
     }
-    prevBtn = "multiply";//"operator"
+    prevBtn = "multiply";
     console.log("multiply " + "numA:" + numA + "\ncurrentOp:" + currentOp.toString() + "\nnumB:" + numB + " displayVar:" + displayVar + "\nprevOp:" + prevOp.toString() + "\nprevBtn:" + prevBtn);
 });
 divideBtn.addEventListener('click', () => {
@@ -358,6 +367,7 @@ divideBtn.addEventListener('click', () => {
         switchNum = true;
     }else if(switchNum===true){
         numB = Number(displayVar);
+        //numA = operate(prevOp, numA, numB);//used to be here
         numB = 0;
         displayVar = numA;
         display.textContent = displayVar;
@@ -369,15 +379,16 @@ divideBtn.addEventListener('click', () => {
             switchNum = true;
         }
     }
-    if(prevBtn==="divide"){//"operator"
+    if(prevBtn==="divide"){
         numB = numA;
         displayVar = operate(prevOp, numA, numB);
         display.textContent = displayVar;
-        switchNum = false;//?
-        //numA = displayVar//??
-        //switchNum = true;//???
+        //switchNum = false;
+
+        numA = displayVar;
+        switchNum = true;
     }
-    prevBtn = "divide";//"operator"
+    prevBtn = "divide";
     console.log("divide " + "numA:" + numA + "\ncurrentOp:" + currentOp.toString() + "\nnumB:" + numB + " displayVar:" + displayVar + "\nprevOp:" + prevOp.toString() + "\nprevBtn:" + prevBtn);
 });
 
@@ -398,7 +409,7 @@ equalBtn.addEventListener('click', () => {
         displayVar = "0";
     }
     switchNum = false;
-    if(prevBtn==="add" || prevBtn==="subtract" || prevBtn==="multiply" || prevBtn==="divide"){//prevBtn==="operator"
+    if(prevBtn==="add" || prevBtn==="subtract" || prevBtn==="multiply" || prevBtn==="divide"){
         resetDisplay = true;
     }
     if(prevBtn==="equal"){
