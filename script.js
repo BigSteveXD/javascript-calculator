@@ -4,6 +4,7 @@ let prevOp;
 let numA = 0;
 let numB = 0;
 let prevBtn = "";
+let lastBtn = "";
 let switchNum = false;
 let resetDisplay = false;
 
@@ -48,7 +49,10 @@ zeroBtn.addEventListener('click', () => {
         resetDisplay=true;
         switchNum = false;
     }
-    prevBtn = "0";
+    if(prevBtn!=="number"){
+        lastBtn = prevBtn;
+        prevBtn = "number";//"0"
+    }
     if(resetDisplay===true){
         displayVar="0";
         resetDisplay = false;
@@ -67,7 +71,10 @@ oneBtn.addEventListener('click', () => {
         resetDisplay=true;
         switchNum = false;
     }
-    prevBtn = "1";
+    if(prevBtn!=="number"){
+        lastBtn = prevBtn;
+        prevBtn = "number";//"1"
+    }
     if(resetDisplay===true){
         displayVar="0";
         resetDisplay = false;
@@ -86,7 +93,10 @@ twoBtn.addEventListener('click', () => {
         resetDisplay=true;
         switchNum = false;
     }
-    prevBtn = "2";
+    if(prevBtn!=="number"){
+        lastBtn = prevBtn;
+        prevBtn = "number";//"2"
+    }
     if(resetDisplay===true){
         displayVar="0";
         resetDisplay = false;
@@ -98,6 +108,8 @@ twoBtn.addEventListener('click', () => {
     }
     display.textContent = displayVar;
     console.log("number " + "numA:" + numA + "\ncurrentOp:" + currentOp.toString() + "\nnumB:" + numB + " displayVar:" + displayVar + "\nprevOp:" + prevOp.toString() + "\nprevBtn:" + prevBtn);
+    
+    console.log("REMOVE: switchNum:" + switchNum);//
 });
 threeBtn.addEventListener('click', () => {
     console.log("threeBtn");
@@ -105,7 +117,10 @@ threeBtn.addEventListener('click', () => {
         resetDisplay=true;
         switchNum = false;
     }
-    prevBtn = "3";
+    if(prevBtn!=="number"){
+        lastBtn = prevBtn;
+        prevBtn = "number";//"3"
+    }
     if(resetDisplay===true){
         displayVar="0";
         resetDisplay = false;
@@ -124,7 +139,10 @@ fourBtn.addEventListener('click', () => {
         resetDisplay=true;
         switchNum = false;
     }
-    prevBtn = "4";
+    if(prevBtn!=="number"){
+        lastBtn = prevBtn;
+        prevBtn = "number";//"4"
+    }
     if(resetDisplay===true){
         displayVar="0";
         resetDisplay = false;
@@ -143,7 +161,10 @@ fiveBtn.addEventListener('click', () => {
         resetDisplay=true;
         switchNum = false;
     }
-    prevBtn = "5";
+    if(prevBtn!=="number"){
+        lastBtn = prevBtn;
+        prevBtn = "number";//"5"
+    }
     if(resetDisplay===true){
         displayVar="0";
         resetDisplay = false;
@@ -162,7 +183,10 @@ sixBtn.addEventListener('click', () => {
         resetDisplay=true;
         switchNum = false;
     }
-    prevBtn = "6";
+    if(prevBtn!=="number"){
+        lastBtn = prevBtn;
+        prevBtn = "number";//"6"
+    }
     if(resetDisplay===true){
         displayVar="0";
         resetDisplay = false;
@@ -181,7 +205,10 @@ sevenBtn.addEventListener('click', () => {
         resetDisplay=true;
         switchNum = false;
     }
-    prevBtn = "7";
+    if(prevBtn!=="number"){
+        lastBtn = prevBtn;
+        prevBtn = "number";//"7"
+    }
     if(resetDisplay===true){
         displayVar="0";
         resetDisplay = false;
@@ -200,7 +227,10 @@ eightBtn.addEventListener('click', () => {
         resetDisplay=true;
         switchNum = false;
     }
-    prevBtn = "8";
+    if(prevBtn!=="number"){
+        lastBtn = prevBtn;
+        prevBtn = "number";//"8"
+    }
     if(resetDisplay===true){
         displayVar="0";
         resetDisplay = false;
@@ -219,11 +249,10 @@ nineBtn.addEventListener('click', () => {
         resetDisplay=true;
         switchNum = false;
     }
-    //if(prevBtn===currentBtn){//create currentBtn
-        //numA=displayVar;
-        //switchNum = true;
-    //}
-    prevBtn = "9";
+    if(prevBtn!=="number"){
+        lastBtn = prevBtn;
+        prevBtn = "number";//"9"
+    }
     if(resetDisplay===true){
         displayVar="0";
         resetDisplay = false;
@@ -251,9 +280,22 @@ addBtn.addEventListener('click', () => {
         numA = Number(displayVar);
         resetDisplay = true;
         switchNum = true;
-    }else if(switchNum===true){
+    }else if((lastBtn!==prevBtn) && (lastBtn==="add" || lastBtn==="subtract" || lastBtn==="multiply" || lastBtn==="divide") && (prevBtn==="number")){//if(lastBtn == Op and prevBtn == number)
+        console.log("special");
+        console.log("before prevOp:" + prevOp + " numA:" + numA + " numB:" + numB);
         numB = Number(displayVar);
-        numB = 0;
+        displayVar = operate(prevOp, numA, numB);
+        display.textContent = displayVar;
+
+        numA = Number(displayVar);
+        switchNum = true;
+        resetDisplay = true;
+        console.log("after prevOp:" + prevOp + " numA:" + numA + " numB:" + numB);
+        console.log("special");
+    }else {//if(switchNum===true)
+        numB = Number(displayVar);
+        //numA = operate(prevOp, numA, numB);//used to be here
+        numB = 0;//was disabled//?
         displayVar = numA;
         display.textContent = displayVar;
         resetDisplay = true;
@@ -269,10 +311,16 @@ addBtn.addEventListener('click', () => {
         displayVar = operate(prevOp, numA, numB);
         display.textContent = displayVar;
         //switchNum = false;
-
         numA = displayVar;
         switchNum = true;
     }
+    if(prevBtn==="subtract" || prevBtn==="multiply" || prevBtn==="divide"){//added
+        displayVar = operate(prevOp, numA, numB);
+        display.textContent = displayVar;
+        numA = displayVar;
+        switchNum = true;
+    }
+    lastBtn = prevBtn;
     prevBtn = "add";
     console.log("add " + "numA:" + numA + "\ncurrentOp:" + currentOp.toString() + "\nnumB:" + numB + " displayVar:" + displayVar + "\nprevOp:" + prevOp.toString() + "\nprevBtn:" + prevBtn);
 });
@@ -289,8 +337,21 @@ subtractBtn.addEventListener('click', () => {
         numA = Number(displayVar);
         resetDisplay = true;
         switchNum = true;
-    }else if(switchNum===true){
+    }else if((lastBtn!==prevBtn) && (lastBtn==="add" || lastBtn==="subtract" || lastBtn==="multiply" || lastBtn==="divide") && (prevBtn==="number")){//if(lastBtn == Op and prevBtn == number)
+        console.log("special");
+        console.log("before prevOp:" + prevOp + " numA:" + numA + " numB:" + numB);
         numB = Number(displayVar);
+        displayVar = operate(prevOp, numA, numB);
+        display.textContent = displayVar;
+
+        numA = Number(displayVar);
+        switchNum = true;
+        resetDisplay = true;
+        console.log("after prevOp:" + prevOp + " numA:" + numA + " numB:" + numB);
+        console.log("special");
+    }else {//if(switchNum===true)
+        numB = Number(displayVar);
+        //numA = operate(prevOp, numA, numB);//used to be here
         numB = 0;
         displayVar = numA;
         display.textContent = displayVar;
@@ -307,10 +368,16 @@ subtractBtn.addEventListener('click', () => {
         displayVar = operate(prevOp, numA, numB);
         display.textContent = displayVar;
         //switchNum = false;
-
         numA = displayVar;
         switchNum = true;
     }
+    if(prevBtn==="add" || prevBtn==="multiply" || prevBtn==="divide"){//added
+        displayVar = operate(prevOp, numA, numB);
+        display.textContent = displayVar;
+        numA = displayVar;
+        switchNum = true;
+    }
+    lastBtn = prevBtn;
     prevBtn = "subtract";
     console.log("subtract " + "numA:" + numA + "\ncurrentOp:" + currentOp.toString() + "\nnumB:" + numB + " displayVar:" + displayVar + "\nprevOp:" + prevOp.toString() + "\nprevBtn:" + prevBtn);
 });
@@ -327,8 +394,21 @@ multiplyBtn.addEventListener('click', () => {
         numA = Number(displayVar);
         resetDisplay = true;
         switchNum = true;
-    }else if(switchNum===true){
+    }else if((lastBtn!==prevBtn) && (lastBtn==="add" || lastBtn==="subtract" || lastBtn==="multiply" || lastBtn==="divide") && (prevBtn==="number")){//if(lastBtn == Op and prevBtn == number)
+        console.log("special");
+        console.log("before prevOp:" + prevOp + " numA:" + numA + " numB:" + numB);
         numB = Number(displayVar);
+        displayVar = operate(prevOp, numA, numB);
+        display.textContent = displayVar;
+
+        numA = Number(displayVar);
+        switchNum = true;
+        resetDisplay = true;
+        console.log("after prevOp:" + prevOp + " numA:" + numA + " numB:" + numB);
+        console.log("special");
+    }else {//if(switchNum===true)
+        numB = Number(displayVar);
+        //numA = operate(prevOp, numA, numB);//used to be here
         numB = 0;
         displayVar = numA;
         display.textContent = displayVar;
@@ -345,10 +425,16 @@ multiplyBtn.addEventListener('click', () => {
         displayVar = operate(prevOp, numA, numB);
         display.textContent = displayVar;
         //switchNum = false;
-
         numA = displayVar;
         switchNum = true;
     }
+    if(prevBtn==="add" || prevBtn==="subtract" || prevBtn==="divide"){//added
+        displayVar = operate(prevOp, numA, numB);
+        display.textContent = displayVar;
+        numA = displayVar;
+        switchNum = true;
+    }
+    lastBtn = prevBtn;
     prevBtn = "multiply";
     console.log("multiply " + "numA:" + numA + "\ncurrentOp:" + currentOp.toString() + "\nnumB:" + numB + " displayVar:" + displayVar + "\nprevOp:" + prevOp.toString() + "\nprevBtn:" + prevBtn);
 });
@@ -365,7 +451,19 @@ divideBtn.addEventListener('click', () => {
         numA = Number(displayVar);
         resetDisplay = true;
         switchNum = true;
-    }else if(switchNum===true){
+    }else if((lastBtn!==prevBtn) && (lastBtn==="add" || lastBtn==="subtract" || lastBtn==="multiply" || lastBtn==="divide") && (prevBtn==="number")){//if(lastBtn == Op and prevBtn == number)
+        console.log("special");
+        console.log("before prevOp:" + prevOp + " numA:" + numA + " numB:" + numB);
+        numB = Number(displayVar);
+        displayVar = operate(prevOp, numA, numB);
+        display.textContent = displayVar;
+
+        numA = Number(displayVar);
+        switchNum = true;
+        resetDisplay = true;
+        console.log("after prevOp:" + prevOp + " numA:" + numA + " numB:" + numB);
+        console.log("special");
+    }else {//if(switchNum===true)
         numB = Number(displayVar);
         //numA = operate(prevOp, numA, numB);//used to be here
         numB = 0;
@@ -384,10 +482,17 @@ divideBtn.addEventListener('click', () => {
         displayVar = operate(prevOp, numA, numB);
         display.textContent = displayVar;
         //switchNum = false;
-
         numA = displayVar;
         switchNum = true;
     }
+    if(prevBtn==="add" || prevBtn==="subtract" || prevBtn==="multiply"){//added
+        displayVar = operate(prevOp, numA, numB);
+        display.textContent = displayVar;
+        numA = displayVar;
+        //numA = Number(displayVar);//?
+        switchNum = true;
+    }
+    lastBtn = prevBtn;
     prevBtn = "divide";
     console.log("divide " + "numA:" + numA + "\ncurrentOp:" + currentOp.toString() + "\nnumB:" + numB + " displayVar:" + displayVar + "\nprevOp:" + prevOp.toString() + "\nprevBtn:" + prevBtn);
 });
@@ -410,7 +515,7 @@ equalBtn.addEventListener('click', () => {
     }
     switchNum = false;
     if(prevBtn==="add" || prevBtn==="subtract" || prevBtn==="multiply" || prevBtn==="divide"){
-        resetDisplay = true;
+        resetDisplay = true;//?
     }
     if(prevBtn==="equal"){
         displayVar = Math.round((((Number(displayVar))+ Number.EPSILON) * 100) / 100).toString();
@@ -435,6 +540,7 @@ equalBtn.addEventListener('click', () => {
         displayVar = operate(currentOp, numA, numB).toString();
         displayVar = Math.round((((Number(displayVar))+ Number.EPSILON) * 100) / 100).toString();
     }
+    lastBtn = prevBtn;
     prevBtn = "equal";
     display.textContent = displayVar;
     console.log("equal " + "numA:" + numA + "\ncurrentOp:" + currentOp.toString() + "\nnumB:" + numB + " displayVar:" + displayVar + "\nprevOp:" + prevOp.toString() + "\nprevBtn:" + prevBtn);
@@ -445,5 +551,7 @@ clearBtn.addEventListener('click', () => {
     numA = 0;
     numB = 0;
     display.textContent = displayVar;
+    lastBtn = prevBtn;
+    prevBtn = "clear";
 });
 
